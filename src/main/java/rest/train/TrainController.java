@@ -21,13 +21,13 @@ public class TrainController {
         return bookings;
     }
 
-    @RequestMapping(value = "/{booking}", method = RequestMethod.GET)
-    public ResponseEntity<String> train(@PathVariable("booking") Integer booking) {
-        String trainCode = bookings.get(booking);
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET)
+    public ResponseEntity<String> train(@PathVariable Integer bookingId) {
+        String trainCode = bookings.get(bookingId);
         if (trainCode == null){
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<String>(trainCode,HttpStatus.OK);
+        return new ResponseEntity<>(trainCode, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -37,18 +37,18 @@ public class TrainController {
         return booking;
     }
 
-    @RequestMapping(value = "/{booking}", method = RequestMethod.PUT)
-    public ResponseEntity update(@PathVariable("booking") Integer booking, @RequestBody String trainCode) {
-        bookings.put(booking, trainCode);
-        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.PUT)
+    public ResponseEntity update(@PathVariable Integer bookingId, @RequestBody String trainCode) {
+        bookings.put(bookingId, trainCode);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @RequestMapping(value = "/{booking}", method = RequestMethod.DELETE)
-    public ResponseEntity cancel(@PathVariable("booking") Integer booking) {
-        if (!bookings.containsKey(booking)){
-            return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.DELETE)
+    public ResponseEntity cancel(@PathVariable Integer bookingId) {
+        if (!bookings.containsKey(bookingId)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        bookings.remove(booking);
-        return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
+        bookings.remove(bookingId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
