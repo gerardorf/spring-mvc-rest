@@ -16,7 +16,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 public class HotelController {
     @RequestMapping(
         method = RequestMethod.GET,
-        produces = "application/x-travel.hotels+json"
+        produces = "application/vnd.travel.hotels+json"
     )
     public Hotels hotels() {
         Hotels hotels = findAllHotels();
@@ -44,7 +44,7 @@ public class HotelController {
     @RequestMapping(
         value = "/{hotelId}/rooms",
         method = RequestMethod.GET,
-        produces = "application/x-travel.rooms+json"
+        produces = "application/vnd.travel.rooms+json"
     )
     public Rooms rooms(@PathVariable int hotelId) {
         Rooms rooms = findRoomsOfHotel(hotelId);

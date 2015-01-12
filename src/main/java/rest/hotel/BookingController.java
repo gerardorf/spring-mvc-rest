@@ -5,14 +5,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/bookings")
+@RequestMapping("/booking")
 public class BookingController {
     private Bookings bookings = new Bookings();
 
     @RequestMapping(
         value = "/{bookingId}",
         method = RequestMethod.GET,
-        produces = "application/x-travel.booking+json"
+        produces = "application/vnd.travel.booking+json"
     )
     public ResponseEntity<Booking> booking(@PathVariable int bookingId) {
         Booking booking = bookings.findBookingById(bookingId);
@@ -24,8 +24,8 @@ public class BookingController {
 
     @RequestMapping(
         method = RequestMethod.POST,
-        headers = {"Content-type=application/x-travel.booking+json"},
-        produces = "application/x-travel.booking+json"
+        headers = {"Content-type=application/vnd.travel.booking+json"},
+        produces = "application/vnd.travel.booking+json"
     )
     public ResponseEntity<Booking> bookRoom(@RequestBody Booking booking) {
         if (bookings.alreadyBooked(booking.getBookingId())) {
