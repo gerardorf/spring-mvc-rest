@@ -1,4 +1,4 @@
-package hello;
+package rest.hotel;
 
 import org.springframework.hateoas.ResourceSupport;
 

@@ -1,4 +1,4 @@
-package hello;
+package rest.hotel;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
