@@ -27,6 +27,12 @@
             <artifactId>spring-hateoas</artifactId>
             <version>0.16.0.RELEASE</version>
         </dependency>
+        <!-- required for HAL support in spring-hateoas -->
+        <!--dependency>
+            <groupId>org.springframework.plugin</groupId>
+            <artifactId>spring-plugin-core</artifactId>
+            <version>1.1.0.RELEASE</version>
+        </dependency-->
     </dependencies>
 
     <properties>
