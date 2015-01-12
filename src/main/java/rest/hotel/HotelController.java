@@ -14,7 +14,10 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/hotels")
 public class HotelController {
-    @RequestMapping(method = RequestMethod.GET, produces = "application/x-travel.hotels+json")
+    @RequestMapping(
+        method = RequestMethod.GET,
+        produces = "application/x-travel.hotels+json"
+    )
     public Hotels hotels() {
         Hotels hotels = findAllHotels();
         addHotelLinks(hotels);
@@ -26,13 +29,23 @@ public class HotelController {
     }
 
     private void addHotelLinks(Hotels hotels) {
-        hotels.add(linkTo(methodOn(HotelController.class).hotels()).withSelfRel());
+        hotels.add(
+            linkTo(methodOn(HotelController.class).hotels()).
+                withSelfRel()
+        );
         for (Hotel hotel : hotels.getHotels()) {
-            hotel.add(linkTo(methodOn(HotelController.class).rooms(hotel.getHotelId())).withRel("rooms"));
+            hotel.add(
+                linkTo(methodOn(HotelController.class).rooms(hotel.getHotelId())).
+                    withRel("rooms")
+            );
         }
     }
 
-    @RequestMapping(value = "/{hotelId}/rooms", method = RequestMethod.GET, produces = "application/x-travel.rooms+json")
+    @RequestMapping(
+        value = "/{hotelId}/rooms",
+        method = RequestMethod.GET,
+        produces = "application/x-travel.rooms+json"
+    )
     public Rooms rooms(@PathVariable int hotelId) {
         Rooms rooms = findRoomsOfHotel(hotelId);
         addRoomLinks(rooms);
@@ -40,13 +53,23 @@ public class HotelController {
     }
 
     private Rooms findRoomsOfHotel(int hotelId) {
-        return new Rooms(hotelId, new Room(1, "single", BigDecimal.valueOf(10)), new Room(2, "double", BigDecimal.valueOf(20)));
+        return new Rooms(
+            hotelId,
+            new Room(1, "single", BigDecimal.valueOf(10)),
+            new Room(2, "double", BigDecimal.valueOf(20))
+        );
     }
 
     private void addRoomLinks(Rooms rooms) {
-        rooms.add(linkTo(methodOn(HotelController.class).rooms(rooms.getHotelId())).withSelfRel());
+        rooms.add(
+            linkTo(methodOn(HotelController.class).rooms(rooms.getHotelId())).
+                withSelfRel()
+        );
         for (Room room : rooms.getRooms()) {
-            room.add(linkTo(methodOn(BookingController.class).bookRoom(new Booking(rooms.getHotelId(), room.getRoomId()))).withRel("bookings"));
+            room.add(
+                linkTo(methodOn(BookingController.class).bookRoom(new Booking(rooms.getHotelId(), room.getRoomId()))).
+                    withRel("booking")
+            );
         }
     }
 }

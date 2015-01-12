@@ -38,7 +38,10 @@ public class TrainController {
     }
 
     @RequestMapping(value = "/{bookingId}", method = RequestMethod.PUT)
-    public ResponseEntity update(@PathVariable Integer bookingId, @RequestBody String trainCode) {
+    public ResponseEntity update(
+        @PathVariable Integer bookingId,
+        @RequestBody String trainCode
+    ) {
         bookings.put(bookingId, trainCode);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
