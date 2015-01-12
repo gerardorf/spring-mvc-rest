@@ -14,7 +14,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 @RestController
 @RequestMapping("/hotels")
 public class HotelController {
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, produces = "application/x-travel.hotels+json")
     public Hotels hotels() {
         Hotels hotels = findAllHotels();
         addHotelLinks(hotels);
@@ -32,7 +32,7 @@ public class HotelController {
         }
     }
 
-    @RequestMapping(value = "/{hotelId}/rooms", method = RequestMethod.GET)
+    @RequestMapping(value = "/{hotelId}/rooms", method = RequestMethod.GET, produces = "application/x-travel.rooms+json")
     public Rooms rooms(@PathVariable int hotelId) {
         Rooms rooms = findRoomsOfHotel(hotelId);
         addRoomLinks(rooms);

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class BookingController {
     private Bookings bookings = new Bookings();
 
-    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{bookingId}", method = RequestMethod.GET, produces = "application/x-travel.booking+json")
     public ResponseEntity<Booking> booking(@PathVariable int bookingId) {
         Booking booking = bookings.findBookingById(bookingId);
         if (booking == null) {
@@ -18,7 +18,7 @@ public class BookingController {
         return new ResponseEntity<>(booking, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, headers = {"Content-type=application/json"})
+    @RequestMapping(method = RequestMethod.POST, headers = {"Content-type=application/x-travel.booking+json"}, produces = "application/x-travel.booking+json")
     public ResponseEntity<Booking> bookRoom(@RequestBody Booking booking) {
         if (bookings.alreadyBooked(booking.getBookingId())) {
             return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
